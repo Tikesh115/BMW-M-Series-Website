@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+
+/* navbar-start */
+.nav {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 150;
+}
+
+nav {
+    position: absolute;
+    display: flex;
+}
+
+nav .logo {
+    height: 60px;
+    margin-top: 10px;
+    padding: 10px 10px;
+}
+
+.menu {
+    padding-top: 20px;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu ul li {
+    display: inline-block;
+    position: relative;
+}
+
+.menu ul li a {
+    padding: 10px 10px;
+    padding-bottom: 5px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.menu ul li ul.dropdown li {
+    display: block;
+}
+
+.menu ul li ul.dropdown {
+    width: 100%;
+    background-color: black;
+    border: 2px black solid;
+    border-radius: 10px;
+    z-index: 999;
+    position: absolute;
+    display: none;
+    margin-top: 3px;
+}
+
+.menu ul li ul.dropdown li a {
+    font-size: 16px;
+    padding: 10px;
+}
+
+.menu ul li:hover ul.dropdown {
+    display: block;
+}
+
+.menu ul li a:hover {
+    text-decoration: underline;
+    transform: scale(1.1);
+}
+
+.menu h1 {
+    padding: 5px 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+/* navbar-end */
+
+.top {
+    width: 100%;
+    position: relative;
+}
+
+.top h1 {
+    position: absolute;
+    font-weight: 600;
+    color: white;
+    align-items: right;
+    z-index: 100;
+    bottom: 10px;
+    right: 10px;
+    font-size: 100px;
+}
+
+.side-view {
+    height: 660px;
+    width: 100%;
+    display: flex;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.side-view .skew {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #bcf788;
+    transform: skewY(30deg);
+    height: 660px;
+    z-index: 2;
+}
+
+.side-view .car {
+    position: absolute;
+    height: 370px;
+    z-index: 4;
+}
