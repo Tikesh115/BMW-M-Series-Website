@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo-light.svg"> 
     <link rel="stylesheet" href="style.css">
-    <!-- scrollreveal -->
-    <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -31,7 +30,7 @@
                     <li><a href="#">Driving Experience</a></li>
                 </ul>
                 <hr style="height: 2px; background-color: white; margin-left: 10px; margin-right: 10px;">
-                <h1 id="clickText" style="cursor: pointer;">Hear The Ultimate Sound</h1>
+                <h1 id="clickText" style="cursor: pointer;">Hear The Ultimate Performance Machine</h1>
                 <audio src="images/audio.mp3" id="sound"></audio>
             </div>
             <a href="index.html">
@@ -51,7 +50,7 @@
         <img src="images/Background-route-img.jpg" style="height: 660px; width: 100%; object-fit: cover; display: block;">
         <div class="skew"></div>
         <h1 class="M5-F90">M5 F90</h1>
-        <img src="images/-bmw-m5-cs-side-car-removebg-preview.png" class="car">
+        <img src="images/-bmw-m5-cs-side-car-removebg-preview.png" class="car reveal">
      </div>
      <div class="intro" style="background-color: rgb(43, 41, 41);">
         <div class="svg-flag">
@@ -145,6 +144,8 @@
                 <p>The M Servotronic offers the right steering torque for every driving situation by adjusting to suit the current driving speed. In addition, it provides direct, precise steering at any speed. The system is M specifically tuned and has two different settings which can be selected at the push of a button.</p>
             </div>
         </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
       </div>
       <!-- slider-container-end -->
       <div class="articles">
