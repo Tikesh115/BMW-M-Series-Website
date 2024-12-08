@@ -77,7 +77,7 @@ nav .logo {
 
 .menu ul li a:hover {
     text-decoration: underline;
-    text-decoration-color: #9cfc97;
+    text-decoration-color: #9fb88f;
     transform: scale(1.1);
 }
 
@@ -89,7 +89,7 @@ nav .logo {
 }
 
 .menu h1:hover {
-    color: #6ba368;
+    color: #9fb88f;
 }
 
 /* navbar-end */
@@ -123,7 +123,7 @@ nav .logo {
     height: 100%;
     width: 100%;
     position: absolute;
-    background-color: #9cfc97;
+    background-color: #9fb88f;
     transform: skewY(30deg);
     height: 660px;
     z-index: 2;
@@ -133,17 +133,6 @@ nav .logo {
     position: absolute;
     height: 100%;
     z-index: 4;
-}
-
-.reveal {
-    transform: translateX(100%);
-    opacity: 0;
-    transition: all 1s ease;
-}
-
-.reveal .active {
-    transform: translateX(0) !important;
-    opacity: 1 !important;
 }
 
 .side-view .M5-F90 {
@@ -199,7 +188,7 @@ nav .logo {
     height: auto;
     width: 100%;
     display: block;
-    margin-top: 120px;
+    margin-top: 30px;
 }
 
 .performance div .box {
