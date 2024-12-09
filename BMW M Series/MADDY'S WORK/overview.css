@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #262626;
+    background-color: white;
     color: white;
     font-family: "Poppins";
 }
@@ -141,15 +141,19 @@ nav .logo {
 .boss .subhead1 {
     font-family: "Abel";
     font-size: 70px;
+    color: black;
 }
 
 .boss .data1 {
     font-size: 27px;
+    color: black;
 }
 
 .boss .subhead2 {
     font-family: "Abel";
     font-size: 70px;
+    color: black;
+
 }
 
 /* ---- */
@@ -273,12 +277,16 @@ nav .logo {
     align-items: center;
     text-align: right center;
     margin: 0;
+    color: black;
+
 }
 
 .container .left p {
     font-family: "Abel", sans-serif;
     font-size: 23px;
     margin: 20px 0;
+    color: black;
+
 }
 
 .left img {
@@ -327,6 +335,8 @@ nav .logo {
     line-height: 1.6;
     padding: 15px;
     text-align: left;
+    color: black;
+
 }
 
 /* ----------------- */
@@ -335,6 +345,8 @@ nav .logo {
     font-family: "Abel";
     text-align: center;
     font-size: 80px;
+    color: black;
+
 }
 
 .container3 {
@@ -363,6 +375,8 @@ nav .logo {
     line-height: 1.6;
     padding: 15px;
     text-align: left;
+    color: black;
+
 }
 
 .img6 img {
@@ -374,6 +388,9 @@ nav .logo {
     font-family: "Abel";
     text-align: center;
     font-size: 80px;
+    color: black;
+
+    
 }
 
 .img7 img {
