@@ -1,0 +1,258 @@
+.img1 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 660px;
+    width: 100%;
+}
+
+.img1 img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.img1 .text-overlay {
+    position: absolute;
+    color: white;
+    font-size: 100px;
+    bottom: 40px;
+    left: 60px;
+    font-weight: 650;
+    line-height: 6rem;
+}
+
+.intro {
+    background-color: rgb(43, 41, 41);
+}
+
+.intro .blue {
+    background-color: #00a1d6;
+}
+
+.intro .dark-blue {
+    background-color: #353189;
+}
+
+.intro .red {
+     background-color: #e3242c;
+}
+
+.boss {
+    margin: 5% 60px;
+    font-weight: 400;
+}
+
+.boss .spefont {
+    font-weight: 650;
+    font-size: 55px;
+}
+
+.boss .data1 {
+    font-size: 27px;
+    color: black;
+}
+
+.boss .subhead2 {
+    font-size: 50px;
+    font-weight: 650;
+    color: black;
+    line-height: 2rem;
+
+}
+
+/* ---- */
+.boss .img2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: -3rem;
+}
+
+.boss .img2::before {
+    content: '';
+    background: linear-gradient(360deg, #111 10%, transparent);
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+}
+
+.boss .img2 img {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+}
+
+.boss .img2 .text-overlay2 {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    bottom: 20px;
+    right: 35px;
+    text-align: right;
+    z-index: 2;
+}
+
+/* --- */
+.boss .img3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: -3rem;
+}
+
+.boss .img3 img {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+}
+
+.boss .img3::before {
+    content: '';
+    background: linear-gradient(360deg, #111 10%, transparent);
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+}
+
+.boss .img3 .text-overlay3 {
+    position: absolute;
+    color: white;
+    font-size: 35px;
+    bottom: 20px;
+    right: 40px;
+    text-align: right;
+    z-index: 2;
+}
+
+/* --- */
+.boss .img4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: -3rem;
+}
+
+.boss .img4 img {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+.boss .img4::before {
+    content: '';
+    background: linear-gradient(360deg, #111 10%, transparent);
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+}
+
+.boss .img4 .text-overlay4 {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    bottom: 20px;
+    right: 35px;
+    text-align: right;
+    z-index: 2;
+}
+
+/* --- */
+.boss .img5 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.boss .img5 img {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+}
+
+.boss .img5::before {
+    content: '';
+    background: linear-gradient(360deg, #111 10%, transparent);
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+}
+
+.boss .img5 .text-overlay5 {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    bottom: 20px;
+    right: 35px;
+    text-align: right;
+    z-index: 2;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px 60px 5%;
+}
+
+.left,
+.right {
+    flex: 1;
+    box-sizing: border-box;
+}
+
+.container .left h1 {
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: right center;
+    margin: 0;
+    font-weight: 600;
+    color: black;
+
+}
+
+.container .left p {
+    margin: 20px 0;
+    color: black;
+    text-align: center;
+}
+
+.left img {
+    height: 600px;
+    width: 50vw;
+    display: block;
+    margin: 0 auto;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    text-align: right;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.right img {
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+}
