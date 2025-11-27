@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.image-grid {
+    column-count: 3;
+    /* Set the number of columns */
+    column-gap: 10px;
+    /* Space between columns */
+    margin: 10px;
+}
+
+.image-grid img {
+    width: 100%;
+    /* Make images scale to column width */
+    margin-bottom: 10px;
+    /* Space between rows */
+    display: block;
+    /* Avoid inline gaps */
+    object-fit: cover;
+    height: 300px;
+}
+
+@media (max-width: 768px) {
+    .image-grid {
+        column-count: 2;
+        /* Two columns on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .image-grid {
+        column-count: 1;
+        /* One column on very small screens */
+    }
+}
