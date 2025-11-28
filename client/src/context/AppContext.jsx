@@ -59,7 +59,6 @@ export const AppProvider = ({children}) => {
         const token = localStorage.getItem('token');
         if(token) {
             setToken(token);
-        } else {
             fetchCars();
         }
     },[]);

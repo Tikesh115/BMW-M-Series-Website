@@ -1,46 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { assets, dummyCarData } from '../../assets/assets';
+import { assets } from '../../assets/assets';
 import Loader from '../../components/Loader/Loader';
+import { useAppContext } from '../../context/AppContext';
+import toast from 'react-hot-toast';
 
 const CarDetails = () => {
     const { id } = useParams();
+
+    const {axios, cars, pickupDate, setPickupDate, returnDate, setReturnDate} = useAppContext();
+
     const navigate = useNavigate();
     const [car, setCar] = useState(null);
     const currency = import.meta.env.VITE_CURRENCY;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const {data} = await axios.post('/api/bookings/create', {
+                car: id,
+                pickupDate,
+                returnDate
+            });
+
+            if (data.success) {
+                toast.success(data.message);
+                navigate('/my-bookings');
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
         console.log('Booking submitted!');
     };
 
     useEffect(() => {
-        setCar(dummyCarData.find(car => car._id === id));
-    }, [id]);
-
-    if (!car) {
-        return <Loader />;
-    }
-
-    const carSpecs = [
-        { icon: assets.users_icon, text: `${car.seating_capacity} Seats` },
-        { icon: assets.fuel_icon, text: car.fuel_type },
-        { icon: assets.car_icon, text: car.transmission },
-        { icon: assets.location_icon, text: car.location },
-    ];
-
-    const featuresList = [
-        "360 Camera",
-        "Bluetooth",
-        "GPS",
-        "Heated Seats",
-        "Rear View Mirror"
-    ];
+        setCar(cars.find(car => car._id === id));
+    }, [cars, id]);
 
     const today = new Date().toISOString().split('T')[0];
 
-    return (
+    return car ? (
         <div className='bg-[#0f0f17] pt-27'>
         <div className='px-6 pb-20 pt-10 bg-light md:px-16 lg:px-24 xl:px-32'>
             {/* Back Button */}
@@ -76,7 +78,12 @@ const CarDetails = () => {
                         <div>
                             <hr className='border-borderColor border-t-2 my-6' />
                             <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
-                                {carSpecs.map(({ icon, text }) => (
+                                {[
+                                    { icon: assets.users_icon, text: `${car.seating_capacity} Seats` },
+                                    { icon: assets.fuel_icon, text: car.fuel_type },
+                                    { icon: assets.car_icon, text: car.transmission },
+                                    { icon: assets.location_icon, text: car.location },
+                                ].map(({ icon, text }) => (
                                     <div key={text} className='flex flex-col items-center bg- border-2 border-gray-400 p-4 rounded-lg'>
                                         <img src={icon} alt="" className='h-5 mb-2' />
                                         {text}
@@ -95,7 +102,13 @@ const CarDetails = () => {
                         <div>
                             <h1 className='text-xl font-medium mb-3'>Features</h1>
                             <ul className='grid grid-cols-1 sm:grid-cols-2 gap-2'>
-                                {featuresList.map((item) => (
+                                {[
+                                    "360 Camera",
+                                    "Bluetooth",
+                                    "GPS",
+                                    "Heated Seats",
+                                    "Rear View Mirror"
+                                ].map((item) => (
                                     <li key={item} className='flex items-center text-gray-500'>
                                         <img src={assets.check_icon} className='h-4 mr-2' alt="" />
                                         {item}
@@ -121,31 +134,17 @@ const CarDetails = () => {
                     {/* Pickup Date */}
                     <div className='flex flex-col gap-2'>
                         <label htmlFor="pickup-date">Pickup Date</label>
-                        <input
-                            type="date"
-                            className='border border-borderColor px-3 py-2 rounded-lg'
-                            required
-                            id='pickup-date'
-                            min={today}
-                        />
+                        <input value={pickupDate} onChange={(e)=>setPickupDate(e.target.value)} type="date" className='border border-borderColor px-3 py-2 rounded-lg' required id='pickup-date' min={today} />
                     </div>
 
                     {/* Return Date */}
                     <div className='flex flex-col gap-2'>
                         <label htmlFor="return-date">Return Date</label>
-                        <input
-                            type="date"
-                            className='border border-borderColor px-3 py-2 rounded-lg'
-                            required
-                            id='return-date'
-                        />
+                        <input value={returnDate} onChange={(e)=>setReturnDate(e.target.value)} type="date" className='border border-borderColor px-3 py-2 rounded-lg' required id='return-date' />
                     </div>
 
                     {/* Book Button */}
-                    <button
-                        type="submit"
-                        className='w-full bg-primary hover:bg-primary-dull transition-all py-3 font-medium text-white rounded-xl cursor-pointer'
-                    >
+                    <button type="submit" className='w-full bg-primary hover:bg-primary-dull transition-all py-3 font-medium text-white rounded-xl cursor-pointer'>
                         Book Now
                     </button>
 
@@ -156,7 +155,7 @@ const CarDetails = () => {
             </div>
         </div>
         </div>
-    )
+    ) : <Loader />
 }
 
 export default CarDetails;
