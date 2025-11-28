@@ -31,7 +31,9 @@ const Home = () => {
             setCurrentSlide((prev)=>(prev+1)%totalSlides);
         }, 5000);
         return () => clearInterval(interval);
+    }, [])
 
+    useEffect(() => {
         const sr = ScrollReveal({
             origin: "bottom",
             distance: "40px",
@@ -40,7 +42,8 @@ const Home = () => {
             easing: "ease-in-out"
         });
 
-        sr.reveal(".nav img", { delay: 600, origin: "left" });
+        sr.reveal(".nav .logo1", { delay: 200, origin: "left" });
+        sr.reveal(".nav .logo2", { delay: 600, origin: "left" });
         sr.reveal(".top .car-name", { origin: "right" });
         sr.reveal(".skew", { origin: "bottom" });
         sr.reveal(".side-view .car", { delay: 600, origin: "right" });

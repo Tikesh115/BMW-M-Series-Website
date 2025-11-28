@@ -15,7 +15,13 @@ nav {
     display: flex;
 }
 
-nav .logo {
+nav .logo1 {
+    height: 85px;
+    margin-top: 10px;
+    padding: 10px 10px;
+}
+
+nav .logo2 {
     height: 85px;
     margin-top: 10px;
     padding: 10px 10px;

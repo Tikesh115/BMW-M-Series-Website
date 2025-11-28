@@ -36,7 +36,7 @@ const Sidebar = () => {
                 <label htmlFor="image">
                     <img src={image ? URL.createObjectURL(image) : user?.image ||
                         "https://images.unsplash.com/photo-1633332755192-72a392095f72?q=80&w=300"} alt=""
-                        className='h-9 md:h-14 w-9 md:w-14 rounded-full mx-auto' />
+                        className='h-9 md:h-14 w-9 md:w-14 object-cover rounded-full mx-auto' />
 
                     <input type="file" id='image' accept="image/*" hidden onChange={(e) =>
                         setImage(e.target.files[0])} />

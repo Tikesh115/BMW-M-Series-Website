@@ -7,6 +7,7 @@ import MLogo from '../../assets/bmw-m-seeklogo.png'
 import profile from '../../assets/user (1).png'
 import { useAppContext } from '../../context/AppContext'
 import toast from 'react-hot-toast'
+import {motion} from 'motion/react'
 
 
 const Navbar = () => {
@@ -58,12 +59,15 @@ const Navbar = () => {
                 <h1 id="clickText" onClick={playSound}>Hear The Ultimate Performance Machine</h1>
                 <audio ref={audioRef} src={audioFile} id="sound"></audio>
             </div>
-            <Link to='/'><img src={BMWLogo} alt='BMW Logo' className="logo"/></Link>   
-            <Link to='/'><img src={MLogo} alt='BMW M Logo' className="logo"/></Link>
+            <Link to='/'><img src={BMWLogo} alt='BMW Logo' className="logo1"/></Link>   
+            <Link to='/'><img src={MLogo} alt='BMW M Logo' className="logo2"/></Link>
             </nav>
             <div className='flex max-sm:flex-col items-start sm:items-center gap-4'>
-              <button className='login-btn' onClick={()=>{user ? logout() : setShowLogin(true)}}>{user ? 'Logout' : 'Login'}</button>
-              <img className='h-11 cursor-pointer' src={profile} onClick={()=>{isOwner ? navigate('/owner') : changeRole()}}/>
+              <motion.button 
+                whileHover={{ scale: 1.05}}
+                whileTap={{ scale: 0.95 }}
+              className='login-btn' onClick={()=>{user ? logout() : setShowLogin(true)}}>{user ? 'Logout' : 'Login'}</motion.button>
+              <img className='h-11 w-11 object-cover cursor-pointer rounded-full' src={user ? user.image : profile} onClick={()=>{isOwner ? navigate('/owner') : changeRole()}}/>
             </div>
             </div>
         </div>
