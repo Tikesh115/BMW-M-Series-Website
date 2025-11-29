@@ -5,6 +5,8 @@
 
 The BMW M Series Website is designed like a polished digital showroom, giving visitors a crisp, immersive look at the entire M lineup. Built with the MERN stack, it features real-time availability checks, secure owner login, and lightning-fast image delivery through ImageKit.io. And when a model steals someone’s attention, the site makes it easy to book it right away — no extra steps, just a clean glide from browsing to confirming. 🚗✨
 
+<img width="1895" height="948" alt="Screenshot 2025-11-29 113351" src="https://github.com/user-attachments/assets/aca6ab4f-7cbb-490b-943c-0f4e769f56df" />
+
 ## 🌟 Key Features
 
 - Immersive Showcase
