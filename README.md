@@ -123,6 +123,9 @@ All endpoints are prefixed with /api.
 
 and more endpoints...
 
+### ⚠️ Legal Disclaimer (Important)
+This project is a personal, educational, and non-commercial portfolio piece developed solely for learning purposes. It is **not affiliated, associated, authorized, endorsed by, or in any way officially connected with BMW AG or BMW M GmbH**, or any of their subsidiaries or affiliates. All product names, logos, and brands are property of their respective owners.
+
 
 https://github.com/user-attachments/assets/953b037b-81d1-4a4b-8533-67b0f6ba1b05
 
