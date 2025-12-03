@@ -122,3 +122,7 @@ All endpoints are prefixed with /api.
 | **Owner** | `/api/owner/cars` | `GET` | Protected (Owner) | View all cars owned by the user. |
 
 and more endpoints...
+
+
+https://github.com/user-attachments/assets/953b037b-81d1-4a4b-8533-67b0f6ba1b05
+
