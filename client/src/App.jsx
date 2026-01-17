@@ -16,6 +16,7 @@ import Overview from './pages/Motor Sport/Overview'
 import Login from './components/Login'
 import { Toaster } from 'react-hot-toast'
 import { useAppContext } from './context/AppContext'
+import Game from './pages/Game/Game.jsx'
 
 
 
@@ -30,6 +31,7 @@ const App = () => {
       {!isOwnerPath && <Navbar />}
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/game'element={<Game/>} />
         <Route path='/car-details/:id' element={<CarDetails />} />
         <Route path='/cars' element={<Cars />} />
         <Route path='/gallery' element={<Mgallery />} />

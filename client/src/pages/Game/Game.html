@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>M5 Highway Run</title>
+    <!-- Linking the external CSS file -->
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+<div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="ui-layer">
+        <div class="hud-panel">
+            <div class="score-box">
+                <div class="label">Score</div>
+                <div class="value" id="scoreDisplay">0</div>
+            </div>
+            <div class="score-box" style="text-align: right;">
+                <div class="label">Best</div>
+                <div class="value highlight" id="bestScoreDisplay">0</div>
+            </div>
+        </div>
+        
+        <!-- Touch Controls Hint (Mobile only) -->
+        <div id="touch-hint" class="hud-panel" style="justify-content: center; opacity: 0.5; padding-bottom: 50px; display: none;">
+            <div class="label">Tap Sides to Steer</div>
+        </div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen">
+        <div class="m-stripe">
+            <div class="ms-1"></div><div class="ms-2"></div><div class="ms-3"></div>
+        </div>
+        <h1>M5 Highway Run</h1>
+        <p>Pilot the ultimate sports sedan.<br>Dodge traffic. Speed up. Survive.</p>
+        <button onclick="startGame()">Start Engine</button>
+        <div class="controls-hint">
+            Desktop: <span class="key">←</span> <span class="key">→</span> or <span class="key">A</span> <span class="key">D</span><br>
+            Mobile: Tap Left / Right
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="screen hidden">
+        <h1>Wasted</h1>
+        <p>You crashed the M5!<br>Score: <span id="finalScore" class="value">0</span></p>
+        <button onclick="resetGame()">Retry</button>
+    </div>
+</div>
+
+<!-- Linking the external JavaScript file -->
+<script src="game.js"></script>
+</body>
+</html>

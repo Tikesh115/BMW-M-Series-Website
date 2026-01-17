@@ -1,15 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 /**
- * M5 Highway Run - Professional Light/Dark Hybrid Edition
- * Updates:
- * - Added 6.5rem top padding to HUD to clear transparent navbar.
- * - Updated color palette to #0f0f17.
- * - Maintained full-screen canvas background.
+ * M5 Highway Run - Professional Performance Edition
+ * * Layout Updates:
+ * - Reserved 6.5rem top spacer for transparent navbar (Bg: #0f0f17).
+ * - All game elements (Canvas, HUD, Dialogs) start below this spacer.
+ * - Entire container background set to #0f0f17.
+ * - Maintains safe lane-switch gaps and dynamic speed scaling.
+ * - Strictly non-italic typography.
  */
 
 const Game = () => {
   const canvasRef = useRef(null);
+  const headerRef = useRef(null);
   
   // UI State
   const [gameState, setGameState] = useState('START');
@@ -19,12 +22,12 @@ const Game = () => {
 
   // High-Contrast "Poppy" Traffic Colors
   const TRAFFIC_COLORS = [
-    '#FACC15', // Yellow
-    '#F472B6', // Pink
-    '#4ADE80', // Green
-    '#22D3EE', // Cyan
-    '#FB923C', // Orange
-    '#EF4444', // Red
+    '#E11D48', // Bright Rose
+    '#D97706', // Amber/Orange
+    '#059669', // Emerald Green
+    '#2563EB', // Blue
+    '#7C3AED', // Violet
+    '#DB2777', // Pink
   ];
 
   // Game Engine State
@@ -74,7 +77,7 @@ const Game = () => {
     } catch (e) {}
   };
 
-  // --- Rendering ---
+  // --- Rendering Helpers ---
   const roundRect = (ctx, x, y, w, h, r) => {
     ctx.beginPath();
     if (ctx.roundRect) ctx.roundRect(x, y, w, h, r);
@@ -130,7 +133,7 @@ const Game = () => {
     ctx.fillRect(car.x + 6, car.y + car.height * 0.6, car.width - 12, car.height * 0.15); 
     ctx.fillRect(car.x + 6, car.y + car.height * 0.15, car.width - 12, car.height * 0.1); 
 
-    // Headlights
+    // Headlights (Bottom)
     ctx.fillStyle = '#fef3c7';
     ctx.shadowBlur = 5; ctx.shadowColor = '#fff';
     ctx.fillRect(car.x + 5, car.y + car.height - 5, 8, 3);
@@ -142,8 +145,13 @@ const Game = () => {
   const resize = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    
+    // Header space height (6.5rem)
+    const headerHeight = 6.5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight - headerHeight;
+
     const g = game.current;
     g.roadWidth = Math.min(600, canvas.width * 0.95);
     g.laneWidth = g.roadWidth / g.laneCount;
@@ -162,8 +170,9 @@ const Game = () => {
     const roadStartX = (canvas.width - g.roadWidth) / 2;
     const laneX = roadStartX + (lane * g.laneWidth) + (g.laneWidth / 2) - (g.player.width / 2);
 
-    const isLaneBlocked = g.traffic.some(c => c.lane === lane && (c.y < 350));
-    const carsInSpawnZone = g.traffic.filter(c => c.y < 200).length;
+    // Large Vertical Safety Buffer
+    const isLaneBlocked = g.traffic.some(c => c.lane === lane && (c.y < 450));
+    const carsInSpawnZone = g.traffic.filter(c => c.y < 250).length;
     const isRoadBlocked = carsInSpawnZone >= g.laneCount - 1;
 
     if (!isLaneBlocked && !isRoadBlocked) {
@@ -181,13 +190,13 @@ const Game = () => {
 
     const ctx = canvasRef.current.getContext('2d', { alpha: false });
     
-    // Tarmac (Light Gray)
+    // Tarmac
     ctx.fillStyle = '#94a3b8';
     ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
     const roadStartX = (canvasRef.current.width - g.roadWidth) / 2;
-    // Shoulders
-    ctx.fillStyle = '#f1f5f9';
+    // Green Fields
+    ctx.fillStyle = '#4ade80';
     ctx.fillRect(0, 0, roadStartX, canvasRef.current.height);
     ctx.fillRect(roadStartX + g.roadWidth, 0, roadStartX, canvasRef.current.height);
 
@@ -205,7 +214,7 @@ const Game = () => {
     // Logic
     g.player.x += (g.player.targetX - g.player.x) * 0.22;
     g.score += 0.05;
-    g.speed = Math.min(g.maxSpeed, g.baseSpeed + (g.score / 55)); 
+    g.speed = Math.min(g.maxSpeed, g.baseSpeed + (g.score / 60)); 
     
     if (Math.floor(g.score) % 5 === 0) setCurrentScore(Math.floor(g.score));
 
@@ -273,7 +282,7 @@ const Game = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen bg-[#0f0f17] overflow-hidden font-sans select-none touch-none text-slate-900">
+    <div className="relative w-full h-screen bg-[#0f0f17] overflow-hidden font-sans select-none touch-none text-slate-900 flex flex-col">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;700&display=swap');
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
@@ -281,73 +290,79 @@ const Game = () => {
         * { font-style: normal !important; }
       `}</style>
 
-      {/* The Canvas stays full-screen (starts from the top) */}
-      <canvas 
-        ref={canvasRef} 
-        className="block"
-        onTouchStart={(e) => move(e.touches[0].clientX < window.innerWidth / 2 ? -1 : 1)}
-      />
+      {/* 6.5rem Transparent Navbar Placeholder */}
+      <div ref={headerRef} className="h-[6.5rem] w-full shrink-0" aria-hidden="true" />
 
-      {/* HUD: Added pt-[6.5rem] to push the score boxes below your Navbar */}
-      <div className="absolute inset-0 pointer-events-none p-6 pt-[6.5rem] flex flex-col justify-between">
-        <div className="flex justify-between items-start animate-in fade-in duration-700">
-          <div className="bg-white/70 backdrop-blur-md border border-black/5 p-4 rounded-xl shadow-lg min-w-[120px]">
-            <p className="text-[9px] text-blue-600 font-bold uppercase tracking-[0.2em] mb-1 font-inter leading-none">Score</p>
-            <p className="font-orbitron text-3xl font-bold tabular-nums text-slate-900 leading-none mt-1">{currentScore}</p>
-          </div>
-          <div className="bg-white/70 backdrop-blur-md border border-black/5 p-4 rounded-xl shadow-lg text-right min-w-[120px]">
-            <p className="text-[9px] text-red-600 font-bold uppercase tracking-[0.2em] mb-1 font-inter leading-none">Best</p>
-            <p className="font-orbitron text-3xl font-bold tabular-nums text-slate-900 leading-none mt-1">{bestScore}</p>
-          </div>
-        </div>
+      {/* Game Area Container */}
+      <div className="relative flex-grow w-full overflow-hidden">
         
-        <div className="text-center opacity-40 text-[8px] uppercase tracking-[0.4em] font-bold sm:hidden pb-4 font-inter leading-none">
-          Tap Sides to Steer
-        </div>
-      </div>
+        {/* The Canvas (starts below the navbar space) */}
+        <canvas 
+          ref={canvasRef} 
+          className="block"
+          onTouchStart={(e) => move(e.touches[0].clientX < window.innerWidth / 2 ? -1 : 1)}
+        />
 
-      {/* Dialog Box: Professional Centering */}
-      {gameState !== 'PLAYING' && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-[#0f0f17]/60 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="w-[90%] max-w-[400px] bg-white border border-slate-200 p-10 rounded-2xl shadow-2xl text-center transform transition-all">
-            
-            {/* Signature BMW Brand Strip */}
-            <div className="flex h-1.5 w-24 mx-auto mb-8 rounded-full overflow-hidden shadow-sm">
-              <div className="flex-1 bg-[#6baef7]"></div>
-              <div className="flex-1 bg-[#1b458f]"></div>
-              <div className="flex-1 bg-[#c91823]"></div>
+        {/* HUD Overlay - Relative to the game area below the navbar */}
+        <div className="absolute inset-0 pointer-events-none p-6 flex flex-col justify-between">
+          <div className="flex justify-between items-start animate-in fade-in duration-700">
+            <div className="bg-white/70 backdrop-blur-md border border-black/5 p-4 rounded-xl shadow-lg min-w-[120px]">
+              <p className="text-[9px] text-blue-600 font-bold uppercase tracking-[0.2em] mb-1 font-inter leading-none">Score</p>
+              <p className="font-orbitron text-3xl font-bold tabular-nums text-slate-900 leading-none mt-1">{currentScore}</p>
             </div>
+            <div className="bg-white/70 backdrop-blur-md border border-black/5 p-4 rounded-xl shadow-lg text-right min-w-[120px]">
+              <p className="text-[9px] text-red-600 font-bold uppercase tracking-[0.2em] mb-1 font-inter leading-none">Best</p>
+              <p className="font-orbitron text-3xl font-bold tabular-nums text-slate-900 leading-none mt-1">{bestScore}</p>
+            </div>
+          </div>
+          
+          <div className="text-center opacity-40 text-[8px] uppercase tracking-[0.4em] font-bold sm:hidden pb-4 font-inter leading-none text-slate-900">
+            Tap Sides to Switch Lanes
+          </div>
+        </div>
 
-            <h1 className="font-orbitron text-3xl font-bold tracking-tight mb-3 text-slate-900 uppercase leading-none">
-              {gameState === 'GAMEOVER' ? 'Session Lost' : 'M5 Highway'}
-            </h1>
-
-            <p className="text-slate-500 font-inter text-sm leading-relaxed mb-10 px-2 font-normal">
-              {gameState === 'GAMEOVER' 
-                ? <>Vehicle integrity compromised.<br/>Velocity Score: <span className="text-slate-900 font-bold">{finalScore}</span></>
-                : <>Engage the twin-turbo V8 powertrain.<br/>Precision maneuvering is mandatory.</>}
-            </p>
-
-            <button 
-              onClick={handleStart}
-              className={`w-full py-4 rounded-xl font-orbitron text-sm font-bold uppercase tracking-[0.2em] transition-all hover:brightness-105 active:scale-95 shadow-xl text-white ${gameState === 'GAMEOVER' ? 'bg-red-600' : 'bg-blue-700'}`}
-            >
-              {gameState === 'GAMEOVER' ? 'Restart Mission' : 'Start Ignition'}
-            </button>
-
-            <div className="mt-8 flex justify-center gap-8 opacity-40">
-              <div className="flex flex-col items-center">
-                <span className="text-[8px] uppercase font-bold tracking-widest mb-2 font-inter text-slate-900 leading-none">Move Left</span>
-                <span className="bg-slate-100 border border-slate-200 px-3 py-1 rounded text-[10px] font-bold font-orbitron text-slate-900">A</span>
+        {/* Dialog Boxes - Centered within the game area */}
+        {gameState !== 'PLAYING' && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-[#0f0f17]/40 backdrop-blur-sm animate-in fade-in duration-300">
+            <div className="w-[90%] max-w-[400px] bg-white border border-slate-200 p-10 rounded-2xl shadow-2xl text-center transform transition-all">
+              
+              <div className="flex h-1.5 w-24 mx-auto mb-8 rounded-full overflow-hidden shadow-sm">
+                <div className="flex-1 bg-[#6baef7]"></div>
+                <div className="flex-1 bg-[#1b458f]"></div>
+                <div className="flex-1 bg-[#c91823]"></div>
               </div>
-              <div className="flex flex-col items-center">
-                <span className="text-[8px] uppercase font-bold tracking-widest mb-2 font-inter text-slate-900 leading-none">Move Right</span>
-                <span className="bg-slate-100 border border-slate-200 px-3 py-1 rounded text-[10px] font-bold font-orbitron text-slate-900">D</span>
+
+              <h1 className="font-orbitron text-3xl font-bold tracking-tight mb-3 text-slate-900 uppercase leading-none">
+                {gameState === 'GAMEOVER' ? 'Session Lost' : 'M5 Highway'}
+              </h1>
+
+              <p className="text-slate-500 font-inter text-sm leading-relaxed mb-10 px-2 font-normal">
+                {gameState === 'GAMEOVER' 
+                  ? <>Vehicle integrity compromised.<br/>Velocity Score: <span className="text-slate-900 font-bold">{finalScore}</span></>
+                  : <>Engage the twin-turbo V8 powertrain.<br/>Precision maneuvering is mandatory.</>}
+              </p>
+
+              <button 
+                onClick={handleStart}
+                className={`w-full py-4 rounded-xl font-orbitron text-sm font-bold uppercase tracking-[0.2em] transition-all hover:brightness-105 active:scale-95 shadow-xl text-white ${gameState === 'GAMEOVER' ? 'bg-red-600' : 'bg-blue-700'}`}
+              >
+                {gameState === 'GAMEOVER' ? 'Restart Mission' : 'Start Ignition'}
+              </button>
+
+              <div className="mt-8 flex justify-center gap-8 opacity-40">
+                <div className="flex flex-col items-center text-slate-900">
+                  <span className="text-[8px] uppercase font-bold tracking-widest mb-2 font-inter leading-none">Move Left</span>
+                  <span className="bg-slate-100 border border-slate-200 px-3 py-1 rounded text-[10px] font-bold font-orbitron">A</span>
+                </div>
+                <div className="flex flex-col items-center text-slate-900">
+                  <span className="text-[8px] uppercase font-bold tracking-widest mb-2 font-inter leading-none">Move Right</span>
+                  <span className="bg-slate-100 border border-slate-200 px-3 py-1 rounded text-[10px] font-bold font-orbitron">D</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -59,7 +59,7 @@ const Navbar = () => {
                 <h1 id="clickText" onClick={playSound}>Hear The Ultimate Performance Machine</h1>
                 <audio ref={audioRef} src={audioFile} id="sound"></audio>
             </div>
-            <Link to='/'><img src={BMWLogo} alt='BMW Logo' className="logo1"/></Link>   
+            <Link to='/game'><img src={BMWLogo} alt='BMW Logo' className="logo1"/></Link>   
             <Link to='/'><img src={MLogo} alt='BMW M Logo' className="logo2"/></Link>
             </nav>
             <div className='flex max-sm:flex-col items-start sm:items-center gap-4'>

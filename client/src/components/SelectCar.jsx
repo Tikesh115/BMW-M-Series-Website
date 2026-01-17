@@ -4,6 +4,7 @@ import { cityList } from '../assets/assets';
 import { assets } from '../assets/assets';
 import { useAppContext } from '../context/AppContext';
 import {motion} from 'motion/react'
+import car from '../assets/BMW_M4.png'
 
 const SelectCar = () => {
     
@@ -18,7 +19,7 @@ const SelectCar = () => {
 
   return (
     <div className='h-165 pt-35 flex flex-col items-center justify-center gap-9 text-center' style={{
-        backgroundImage: `  linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)), url(${bgImg})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)), url(${bgImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
@@ -63,7 +64,7 @@ const SelectCar = () => {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-      src={assets.main_car} className='max-h-74' />
+      src={car} className='max-h-64' />
     </div>
   )
 }

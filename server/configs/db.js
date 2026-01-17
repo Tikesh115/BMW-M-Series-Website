@@ -2,10 +2,14 @@ import mongoose from "mongoose";
 
 const connectDB = async ()=>{
     try {
-        mongoose.connection.on('connected', ()=>console.log("Database Connected"));
-        await mongoose.connect(`${process.env.MONGODB_URI}/bmw-m-series`);
+        await mongoose.connect(`${process.env.MONGODB_URI}/bmw-m-series`, {
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
+        });
+        console.log("Database Connected");
     } catch(error) {
-        console.log(error.message);
+        console.log("Database Connection Error:", error.message);
+        process.exit(1);
     }
 }
 
